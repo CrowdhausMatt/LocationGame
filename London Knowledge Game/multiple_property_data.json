@@ -1,0 +1,68 @@
+[
+    {
+        "url": "https://www.rightmove.co.uk/properties/151938803#/?channel=RES_BUY",
+        "image": "https://media.rightmove.co.uk/227k/226316/151938803/226316_PLD240037_IMG_00_0000.jpeg",
+        "latitude": 51.501343,
+        "longitude": -0.163962
+    },
+    {
+        "url": "https://www.rightmove.co.uk/properties/153330098#/?channel=RES_BUY",
+        "image": "https://media.rightmove.co.uk/64k/63077/153330098/63077_MRY150022_IMG_00_0002.jpeg",
+        "latitude": 51.519767,
+        "longitude": -0.144735
+    },
+    {
+        "url": "https://www.rightmove.co.uk/properties/148711631#/?channel=RES_BUY",
+        "image": "https://media.rightmove.co.uk/272k/271223/148711631/271223_50_CLOI_IMG_00_0000.jpeg",
+        "latitude": 51.501871,
+        "longitude": -0.161945
+    },
+    {
+        "url": "https://www.rightmove.co.uk/properties/152066243#/?channel=RES_BUY",
+        "image": "https://media.rightmove.co.uk/224k/223055/152066243/223055_OBP220209_IMG_02_0000.jpeg",
+        "latitude": 51.509216,
+        "longitude": -0.152671
+    },
+    {
+        "url": "https://www.rightmove.co.uk/properties/152236991#/?channel=RES_NEW",
+        "image": "https://media.rightmove.co.uk/222k/221522/152236991/221522_chelseabarracks_IMG_32_0000.jpeg",
+        "latitude": 51.48921,
+        "longitude": -0.15474
+    },
+    {
+        "url": "https://www.rightmove.co.uk/properties/86606607#/?channel=RES_BUY",
+        "image": "https://media.rightmove.co.uk/112k/111955/86606607/111955_31302580_IMG_00_0000.jpeg",
+        "latitude": 51.499744,
+        "longitude": -0.141526
+    },
+    {
+        "url": "https://www.rightmove.co.uk/properties/134329280#/?channel=RES_NEW",
+        "image": "https://media.rightmove.co.uk/42k/41063/134329280/41063_PRD012257989_IMG_00_0002.jpeg",
+        "latitude": 51.501177,
+        "longitude": -0.1534
+    },
+    {
+        "url": "https://www.rightmove.co.uk/properties/154178180#/?channel=RES_NEW",
+        "image": "https://media.rightmove.co.uk/193k/192446/154178180/192446_NEST_RM_192446_3750887_IMG_00_0000.jpeg",
+        "latitude": 51.513403,
+        "longitude": -0.144153
+    },
+    {
+        "url": "https://www.rightmove.co.uk/properties/148907393#/?channel=RES_BUY",
+        "image": "https://media.rightmove.co.uk/103k/102385/148907393/102385_2669453_IMG_00_0000.jpeg",
+        "latitude": 51.51006,
+        "longitude": -0.15404
+    },
+    {
+        "url": "https://www.rightmove.co.uk/properties/140837231#/?channel=RES_BUY",
+        "image": "https://media.rightmove.co.uk/26k/25602/140837231/25602_KNH230176_IMG_00_0000.jpeg",
+        "latitude": 51.496442,
+        "longitude": -0.157073
+    },
+    {
+        "url": "https://www.rightmove.co.uk/properties/141659681#/?channel=RES_BUY",
+        "image": "https://media.rightmove.co.uk/113k/112651/141659681/112651_32706724_IMG_00_0000.jpeg",
+        "latitude": 51.50373,
+        "longitude": -0.14952
+    }
+]

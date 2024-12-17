@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>London Knowledge Game</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div id="image-container">
+        <img src="{{ properties[current_property_id]['image'] }}" alt="Property Image">
+    </div>
+
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
+
+    <div id="result"></div>
+    <button id="next-button">Next Property</button>
+
+    <!-- Logo in top right corner -->
+    <div id="logo-container">
+        <a href="https://knokknok.social/" target="_blank">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Knok Knok Logo" id="knok-logo">
+        </a>
+    </div>
+
+    {% if property_index == 0 %}
+    <div id="leaderboard-modal">
+        <div id="leaderboard-content">
+            <h2>Guess the location of the property listing</h2>
+            <h3>Top Scores</h3>
+            <div id="leaderboard-table-container">
+                <table id="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Player Name</th>
+                            <th>Agency</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Filled by JS -->
+                    </tbody>
+                </table>
+            </div>
+            <button id="play-now-button">Play Now!</button>
+        </div>
+    </div>
+    {% endif %}
+
+    <script>
+        const propertyIndex = {{ property_index }};
+        const totalScore = parseFloat("{{ total_score }}");
+        const currentPropertyId = {{ current_property_id }};
+        const selectedIndicesStr = "{{ selected_indices_str }}";
+        const propertyLocation = [{{ properties[current_property_id]['latitude'] }}, {{ properties[current_property_id]['longitude'] }}];
+    </script>
+    <script src="{{ url_for('static', filename='js/leaderboard.js') }}"></script>
+    <script>
+        const startLocation = [51.50943, -0.14647]; 
+        const map = L.map("map").setView(startLocation, 15);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+
+        let hasGuessed = false;
+        let guessMarker;
+
+        map.on("click", function (e) {
+            if (hasGuessed) return; // Only allow one guess per property
+
+            const { lat, lng } = e.latlng;
+            if (guessMarker) map.removeLayer(guessMarker);
+            guessMarker = L.marker([lat, lng]).addTo(map);
+
+            // Include selected_indices in the guess request
+            fetch(`/guess?selected_indices=${selectedIndicesStr}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ latitude: lat, longitude: lng, property_index: propertyIndex })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const distance = data.distance;
+                document.getElementById("result").innerText = `You were ${distance.toFixed(1)} km away!`;
+                hasGuessed = true;
+
+                // Show the actual property location
+                L.marker(propertyLocation, {
+                    icon: L.icon({
+                        iconUrl: "/static/images/house_icon.png",
+                        iconSize: [35, 35],
+                        iconAnchor: [17, 34]
+                    })
+                }).addTo(map);
+
+                const nextButton = document.getElementById("next-button");
+                nextButton.style.display = "block";
+                nextButton.onclick = function () {
+                    const newTotalScore = totalScore + distance;
+                    // Pass selected_indices_str along to the next property
+                    window.location.href = `/?property_index=${propertyIndex + 1}&total_score=${newTotalScore}&selected_indices=${selectedIndicesStr}`;
+                };
+            });
+        });
+    </script>
+</body>
+</html>
