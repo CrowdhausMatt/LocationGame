@@ -3,31 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <title>Game Over</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+        #container {
+            display: flex;
+            width: 80%;
+            height: 70%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #image-section {
+            flex: 1;
+            background: url('/static/images/game_over_image.png') no-repeat center center;
+            background-size: cover;
+            cursor: pointer;
+        }
+        #details-section {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: red;
+        }
+        p {
+            font-size: 20px;
+        }
+        input {
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-    <div id="game-over">
-        <h1>Game Over!</h1>
-        <p>Your total score: {{ "%.1f"|format(total_score) }} km</p>
-        
-        <form action="{{ url_for('submit_score') }}" method="POST" id="score-form">
-            <input type="hidden" name="score" value="{{ "%.1f"|format(total_score) }}">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" name="name" id="name" required>
-            </div>
-            <div class="form-group">
-                <label for="agency">Agency:</label>
-                <input type="text" name="agency" id="agency" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email (not displayed publicly):</label>
-                <input type="email" name="email" id="email" required>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+    <div id="container">
+        <!-- Image Section -->
+        <div id="image-section" onclick="window.open('https://knokknok.social/', '_blank')"></div>
 
-        <button onclick="window.location.href='/'">Play Again</button>
+        <!-- Details Section -->
+        <div id="details-section">
+            <h1>Game Over!</h1>
+            <p>Your total score: {{ total_score.toFixed(1) }} km</p>
+            <p>Enter your details to appear on the leaderboard:</p>
+            <form action="/submit_score" method="POST">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="text" name="agency" placeholder="Agency" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="hidden" name="score" value="{{ total_score }}">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
