@@ -13,6 +13,11 @@ def enforce_https():
     if request.headers.get('X-Forwarded-Proto') == 'http':
         return redirect(request.url.replace('http://', 'https://', 1))
 
+@app.after_request
+def add_header(response):
+    response.headers['X-Frame-Options'] = 'ALLOWALL'
+    return response
+
 properties = read_json("multiple_property_data.json")
 NUM_PROPERTIES_PER_GAME = 5  # Change this if you want more or fewer properties per game
 
